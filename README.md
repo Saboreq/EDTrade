@@ -60,7 +60,7 @@ GitHub Actions runs the tests and TypeScript/Vite build on pushes and pull reque
 
 ## Privacy
 
-No account, analytics or tracking scripts. Settings, presets and saved routes stay in browser storage; clearing that storage deletes them. Searches send the system and market filters to the server and Spansh. Shared URLs include balance and planning preferences. Google Fonts supplies Barlow Condensed and Rajdhani, with system fallbacks. Imported snapshots are validated and held in memory; no database upload.
+No account, analytics or tracking scripts. Settings, presets and saved routes stay in browser storage; clearing that storage deletes them. Searches send the system and market filters to the server and Spansh. Shared URLs include balance and planning preferences. Barlow Condensed and Rajdhani fonts are bundled locally with system fallbacks. Imported snapshots are validated and held in memory; no database upload.
 
 ## Credits
 
