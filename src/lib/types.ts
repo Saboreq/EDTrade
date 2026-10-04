@@ -1,0 +1,14 @@
+export interface Commodity { key: string; name: string; category: string; buy: number; sell: number; supply: number; demand: number; }
+export interface Station { id: string; name: string; system: string; systemId: string; x: number; y: number; z: number; distance: number; arrival: number | null; pad: number; planetary: boolean; carrier: boolean; permit: boolean; permitKnown: boolean; prohibited: string[]; services: string[]; type: string; updated: string; commodities: Commodity[]; }
+export interface Reference { name: string; id: string; x: number; y: number; z: number; }
+export interface Snapshot { stations: Station[]; reference: Reference; fetchedAt: string; source: string; total: number; loaded: number; truncated: boolean; warnings: string[]; radius: number; }
+export interface Ship { name: string; cargo: number; pad: number; jump: number; budget: number; reserve: number; sco: boolean; dockingMinutes: number; jumpSeconds: number; }
+export interface Settings { system: string; startStation: string; mode: 'multi'|'loop'|'destination'; destination: string; hops: number; radius: number; maxArrival: number; maxAgeHours: number; maxJumps: number; maxMinutes: number; planetary: boolean; carriers: boolean; permits: boolean; unknown: boolean; unique: boolean; mixed: boolean; demandFraction: number; haircut: number; minMargin: number; fuelCost: number; objective: 'rate'|'profit'; excluded: string; }
+export interface Cargo { key: string; name: string; quantity: number; buy: number; sell: number; profit: number; supply: number; demand: number; }
+export interface Leg { from: Station; to: Station; cargo: Cargo[]; quantity: number; cost: number; profit: number; minutes: number; distance: number; jumps: number; balance: number; }
+export interface Route { id: string; legs: Leg[]; profit: number; minutes: number; rate: number; balance: number; initialMinutes: number; terminalMinutes: number; terminal?: Station; maxAgeHours: number; }
+export interface PlanResult { routes: Route[]; eligible: number; considered: number; elapsedMs: number; warnings: string[]; }
+export interface SavedRun { id: string; name: string; savedAt: string; ship: Ship; settings: Settings; route: Route; source: string; }
+export const defaultShip: Ship = {name:'Anaconda', cargo:412, pad:3, jump:25, budget:50_000_000, reserve:5_000_000, sco:false, dockingMinutes:3, jumpSeconds:55};
+export const defaultSettings: Settings = {system:'Nu Tauri',startStation:'',mode:'multi',destination:'',hops:5,radius:80,maxArrival:2000,maxAgeHours:48,maxJumps:3,maxMinutes:90,planetary:false,carriers:false,permits:false,unknown:false,unique:false,mixed:true,demandFraction:0.1,haircut:0.02,minMargin:500,fuelCost:1000,objective:'rate',excluded:''};
+export const commodityKey = (s: string) => s.toLowerCase().replace(/[^a-z0-9]/g,'');

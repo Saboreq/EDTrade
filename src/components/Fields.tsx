@@ -1,0 +1,4 @@
+import type { ReactNode } from 'react';
+export function Field({label,children,hint}:{label:string;children:ReactNode;hint?:string}){return <label className="field"><span>{label}</span>{children}{hint&&<small>{hint}</small>}</label>;}
+export function Numeric({label,value,onChange,min=0,max=1e9,step=1,hint}:{label:string;value:number;onChange:(n:number)=>void;min?:number;max?:number;step?:number;hint?:string}){return <Field label={label} hint={hint}><input type="number" value={value} min={min} max={max} step={step} onChange={e=>onChange(Number(e.target.value))} required/></Field>;}
+export function Toggle({label,value,onChange,hint}:{label:string;value:boolean;onChange:(b:boolean)=>void;hint?:string}){return <label className="toggle"><input type="checkbox" checked={value} onChange={e=>onChange(e.target.checked)}/><span>{label}{hint&&<small>{hint}</small>}</span></label>;}
