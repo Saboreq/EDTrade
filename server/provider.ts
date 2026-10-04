@@ -27,9 +27,9 @@ export async function getMarkets(q:MarketQuery):Promise<Snapshot> {
     const pages=[first];
     if(first.count>250)pages.push(await request('stations/search',{...query,page:1}));
     const result=normalizeSnapshot(pages,q.radius);
-    result.stations=result.stations.filter(s=>(q.carriers==='true'||!s.carrier)&&(q.permits==='true'||!s.permit)&&s.pad>=q.pad);
+    result.stations=result.stations.filter(s=>{const age=(Date.now()-Date.parse(s.updated))/3600000;return (q.carriers==='true'||!s.carrier)&&(q.permits==='true'||!s.permit)&&(q.planetary==='true'||!s.planetary)&&s.pad>=q.pad&&s.distance<=q.radius&&s.arrival!==null&&s.arrival<=q.maxArrival&&Number.isFinite(age)&&age>=-0.02&&age<=q.age;});
     result.loaded=result.stations.length;
-    // The optimizer also applies every filter locally. Never trust remote filters alone.
+    // The optimizer also applies eligibility filters locally. Never trust remote filters alone.
     if(cache.size>30)cache.delete(cache.keys().next().value!);
     cache.set(key,{expires:Date.now()+180000,data:result});return result;
   })();

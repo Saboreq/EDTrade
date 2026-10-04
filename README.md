@@ -10,7 +10,7 @@ An Elite Dangerous Live market explorer and ship-aware multi-stop trade planner.
 - Mixed-commodity or single-commodity loads, affordability checks, cumulative stock/demand depletion on revisits, sale-price haircut, demand cap, fuel estimates.
 - Approach limits, freshness, radius, jump count, session budget, permit/carrier/planetary filters, commodity exclusions and unique stations.
 - Alternative routes, cargo manifests, market timestamps, copy destinations, leg completion, and fresh replanning from a completed stop.
-- Market browser with search, price/freshness sorting, pagination and CSV exports.
+- Market browser with search, price/freshness sorting and pagination; route CSV and market JSON exports.
 - Shareable settings URLs; snapshot import/export and offline planning.
 - Geographic route projections, explicit search coverage and estimate caveats.
 - Responsive interface, focus states and reduced-motion support.
