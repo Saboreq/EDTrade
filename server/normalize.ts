@@ -1,4 +1,4 @@
-import { commodityKey, type Station, type Snapshot } from '../src/lib/types';
+import { commodityKey, type Station, type Snapshot } from '../src/lib/types.js';
 type Raw = Record<string, any>;
 const finite = (v:unknown): v is number => typeof v==='number' && Number.isFinite(v);
 export function normalizeStation(r: Raw): Station | null {

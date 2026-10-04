@@ -1,5 +1,5 @@
 import type { VercelRequest, VercelResponse } from '@vercel/node';
-import { getMarkets, marketQuery } from '../server/provider';
+import { getMarkets, marketQuery } from '../server/provider.js';
 export const config={maxDuration:60};
 export default async function handler(req:VercelRequest,res:VercelResponse) {
  if(req.method!=='GET')return res.status(405).json({error:'Use GET.'});

@@ -1,6 +1,6 @@
 import { z } from 'zod';
-import { normalizeSnapshot } from './normalize';
-import type { Snapshot } from '../src/lib/types';
+import { normalizeSnapshot } from './normalize.js';
+import type { Snapshot } from '../src/lib/types.js';
 export const marketQuery=z.object({system:z.string().trim().min(1).max(100), radius:z.coerce.number().min(10).max(300).default(80),maxArrival:z.coerce.number().min(100).max(1000000).default(2000),age:z.coerce.number().min(1).max(720).default(48),pad:z.coerce.number().int().min(1).max(3).default(3),planetary:z.enum(['true','false']).default('false'),carriers:z.enum(['true','false']).default('false'),permits:z.enum(['true','false']).default('false')});
 export type MarketQuery=z.infer<typeof marketQuery>;
 const cache=new Map<string,{expires:number;data:Snapshot}>();
