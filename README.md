@@ -70,4 +70,4 @@ Elite Dangerous belongs to Frontier Developments. EDTrade is an independent comm
 
 ## Flight Deck design
 
-The dashboard uses a station-by-station trading timeline, route instruments, geographic map projections and a compact ship inspector. Wireframe hull art and celestial backdrop are generated illustration assets; map paths and market data are rendered from actual observations. The hull illustration is an Anaconda reference, not an outfitting preview. See [design specification](docs/flight-deck-design.md).
+The dashboard uses a station-by-station trading timeline, route instruments, geographic map projections and a compact ship inspector. Wireframe hull art and celestial backdrop are generated illustration assets; map paths and market data are rendered from actual observations. The hull illustration is an Anaconda reference, not an outfitting preview. See [design specification](docs/flight-deck-design.md) and [release verification](docs/verification.md).
