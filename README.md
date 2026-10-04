@@ -1,6 +1,6 @@
 # EDTrade
 
-An Elite Dangerous Live market explorer and ship-aware multi-stop trade planner. Built for Saboreq.
+An Elite Dangerous Live market explorer and ship-aware multi-stop trade planner. Built for Saboreq. The Flight Deck interface follows the approved amber/graphite cockpit concept.
 
 ## Features
 
@@ -60,10 +60,14 @@ GitHub Actions runs the tests and TypeScript/Vite build on pushes and pull reque
 
 ## Privacy
 
-No account, analytics or tracking scripts. Settings, presets and saved routes stay in browser storage; clearing that storage deletes them. Searches send the system and market filters to the server and Spansh. Shared URLs include balance and planning preferences. Google Fonts is used with a system fallback. Imported snapshots are validated and held in memory; no database upload.
+No account, analytics or tracking scripts. Settings, presets and saved routes stay in browser storage; clearing that storage deletes them. Searches send the system and market filters to the server and Spansh. Shared URLs include balance and planning preferences. Google Fonts supplies Barlow Condensed and Rajdhani, with system fallbacks. Imported snapshots are validated and held in memory; no database upload.
 
 ## Credits
 
 Market data: [Spansh](https://spansh.co.uk), [EDDN / EDCD](https://github.com/EDCD/EDDN) and commanders contributing with community connectors. Thanks to the Elite Dangerous tools community.
 
 Elite Dangerous belongs to Frontier Developments. EDTrade is an independent community tool, not affiliated with Frontier.
+
+## Flight Deck design
+
+The dashboard uses a station-by-station trading timeline, route instruments, geographic map projections and a compact ship inspector. Wireframe hull art and celestial backdrop are generated illustration assets; map paths and market data are rendered from actual observations. The hull illustration is an Anaconda reference, not an outfitting preview. See [design specification](docs/flight-deck-design.md).

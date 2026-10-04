@@ -1,0 +1,9 @@
+import {useEffect,useState} from 'react';
+import {Boxes,Database,Globe2,Orbit,Route,Settings,Ship} from 'lucide-react';
+import type {Snapshot} from '../lib/types';import {age} from '../lib/format';
+export type FlightTab='planner'|'markets'|'commodities'|'saved'|'systems'|'data';
+export default function FlightHeader({tab,setTab,snapshot,busy}:{tab:FlightTab;setTab:(t:FlightTab)=>void;snapshot:Snapshot|null;busy:boolean}){
+ const [now,setNow]=useState(new Date());useEffect(()=>{const t=setInterval(()=>setNow(new Date()),60000);return ()=>clearInterval(t);},[]);
+ const nav=[['planner','Trade plan',Database],['markets','Markets',Globe2],['commodities','Commodities',Boxes],['saved','Routes',Route],['systems','Systems',Ship],['data','Settings',Settings]] as const;
+ return <header className="flight-header"><a className="flight-brand" href="/" onClick={e=>{e.preventDefault();setTab('planner');}}>ED<span>Trade</span></a><div className="flight-caption"><span>FLIGHT DECK</span><small>Elite Dangerous Commodity Trading Planner</small></div><nav aria-label="Main navigation">{nav.map(([id,label,Icon])=><button type="button" key={id} className={tab===id?'active':''} aria-current={tab===id?'page':undefined} onClick={()=>setTab(id)}><Icon size={15}/>{label}</button>)}</nav><div className="market-status"><span><i className={snapshot?'dot':'dot neutral'}/>{busy?'Updating markets':snapshot?'Market data online':'Market data standby'}</span><small>{snapshot?'Last update '+age(snapshot.fetchedAt):'Plan a route to fetch prices'}</small></div><div className="flight-clock"><b>{now.toLocaleTimeString('en-GB',{hour:'2-digit',minute:'2-digit',timeZone:'UTC'})}</b><small>{now.toLocaleDateString('en-GB',{day:'2-digit',month:'short',year:'numeric',timeZone:'UTC'}).toUpperCase()} · UTC</small></div><Orbit className="mobile-mark" size={22}/></header>;
+}
