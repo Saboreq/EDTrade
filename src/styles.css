@@ -16,3 +16,4 @@
 .itinerary-scroll{overflow-y:hidden;scrollbar-width:thin;scrollbar-color:#655032 #0b151b}.flight-itinerary{width:calc(100% - 2px)}.flight-itinerary th:last-child{font-size:10px}.alternative-table{width:calc(100% - 2px)}
 @media(min-width:1251px) and (max-width:1450px){.alternative-table{min-width:715px}.alternative-table th{font-size:10px;padding:7px 5px}.alternative-table td{font-size:11px;padding:8px 5px}.alternative-table .outline{padding:4px 10px}.instrument:nth-child(4) span{white-space:nowrap}}
 .flight-itinerary .stop-marker:before{left:50%;transform:translateX(-50%)}.stop-marker.first:before{top:28px}.stop-marker.last:before{bottom:calc(100% - 28px)}
+@media(min-width:761px) and (max-width:850px){.flight-header .flight-clock{display:none}}
