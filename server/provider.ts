@@ -21,14 +21,14 @@ export async function getMarkets(q:MarketQuery):Promise<Snapshot> {
     const filters:Record<string,unknown>={distance:{min:0,max:q.radius},distance_to_arrival:{min:0,max:q.maxArrival},has_market:{value:true},market_updated_at:{comparison:'<=>',value:[before,new Date(Date.now()+60000).toISOString()]}};
     if(q.pad===3)filters.has_large_pad={value:true};
     if(q.planetary==='false')filters.is_planetary={value:false};
-    if(q.permits==='false')filters.system_needs_permit={value:false};
-    if(q.carriers==='false')filters.type={value:['Fleet Carrier'],comparison:'!='};
     const query={filters,sort:[{distance:{direction:'asc'}}],size:250,page:0,reference_system:q.system};
     const first=await request('stations/search',query);
     if(!Array.isArray(first.results))throw new Error('Unexpected market provider response. Please retry.');
     const pages=[first];
     if(first.count>250)pages.push(await request('stations/search',{...query,page:1}));
     const result=normalizeSnapshot(pages,q.radius);
+    result.stations=result.stations.filter(s=>(q.carriers==='true'||!s.carrier)&&(q.permits==='true'||!s.permit)&&s.pad>=q.pad);
+    result.loaded=result.stations.length;
     // The optimizer also applies every filter locally. Never trust remote filters alone.
     if(cache.size>30)cache.delete(cache.keys().next().value!);
     cache.set(key,{expires:Date.now()+180000,data:result});return result;

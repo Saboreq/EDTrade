@@ -48,8 +48,9 @@ export function planRoutes(snapshot:Snapshot,ship:Ship,o:Settings,progress?:(p:n
  if(start&&!roots.length) return {routes:[],eligible:stations.length,considered:0,elapsedMs:performance.now()-t0,warnings:['Your starting station has no eligible market in this snapshot. Check its name or increase the market age / station filters.']};
  // If no start station specified, include repositioning to the first purchase.
  const firsts=start?roots:[...stations].sort((a,b)=>travel(snapshot.reference,a,ship,o).minutes-travel(snapshot.reference,b,ship,o).minutes).slice(0,48);
- let states:State[]=firsts.map(s=>{const move=travel(snapshot.reference,s,ship,o);return {at:s,origin:s,balance:ship.budget,profit:0,minutes:move.minutes,initialMinutes:move.minutes,legs:[],used:{},visited:new Set([s.id])};}).filter(s=>o.startStation?true:travel(snapshot.reference,s.at,ship,o).jumps<=o.maxJumps);
- if(start)states=states.map(s=>({...s,minutes:0,initialMinutes:0}));
+ let states:State[]=firsts.map(s=>{const move=travel(snapshot.reference,s,ship,o);return {at:s,origin:s,balance:ship.budget-move.jumps*o.fuelCost,profit:-move.jumps*o.fuelCost,minutes:move.minutes,initialMinutes:move.minutes,legs:[],used:{},visited:new Set([s.id])};}).filter(s=>o.startStation?true:travel(snapshot.reference,s.at,ship,o).jumps<=o.maxJumps);
+ if(start)states=states.map(s=>({...s,balance:ship.budget,profit:0,minutes:0,initialMinutes:0}));
+ states=states.filter(s=>s.balance>ship.reserve);
  const edges=new Map<string,{to:Station;travel:ReturnType<typeof travel>}[]>();
  for(const s of stations)edges.set(s.id,stations.filter(d=>d.id!==s.id).map(d=>({to:d,travel:travel(s,d,ship,o)})).filter(e=>e.travel.jumps<=o.maxJumps));
  const completed:Route[]=[];let considered=0;
